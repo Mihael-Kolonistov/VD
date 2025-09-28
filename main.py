@@ -15,6 +15,7 @@ msg={
         }
     }
 
+
 def sendCur(pos = lib.posc, msg=msg):    
     import sender
     msg["content"]["text"] = ""
