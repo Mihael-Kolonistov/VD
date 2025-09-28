@@ -1,24 +1,23 @@
 import socket
 import threading
 import json
-def init():
-    global s, tp
-    ip = '127.0.0.1'
-    port = 12345
 
+ip = '127.0.0.1'
+port = 12345
+
+s = socket.socket()
+
+print("Ожидание подключения...")
+try:
+    s.connect((ip, port))
+    tp = "client"
+except:
+    s.close()
     s = socket.socket()
-
-    print("Ожидание подключения...")
-    try:
-        s.connect((ip, port))
-        tp = "client"
-    except:
-        s.close()
-        s = socket.socket()
-        s.bind(('0.0.0.0', port))
-        tp = "server"
-        s.listen()
-        s, _ = s.accept()
+    s.bind(('0.0.0.0', port))
+    tp = "server"
+    s.listen()
+    s, _ = s.accept()
 
 def recv():
     while True:
@@ -34,9 +33,7 @@ def recv():
             print(e)            
             pass
 
-
+threading.Thread(target=recv, daemon=True).start()
 
 def send(msg):
     s.send(msg.encode())
-    
-init()

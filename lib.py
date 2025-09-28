@@ -1,7 +1,6 @@
 import pyautogui
 import msvcrt
 import threading
-import main
 posc=()
 poscBefore=()
 click = False
@@ -12,19 +11,11 @@ def pos():
         x,y = pyautogui.position()
         poscBefore = posc
         posc=(x,y)
-        main.send()
     
 def press():  
     global pressed          
     char = msvcrt.getch() 
-    pressed = char.decode('utf-8')
-    main.updateMsg()
-    main.send()
+    pressed = char.decode('utf-8')  
+    
     pressed = ""
-    main.updateMsg()
-    main.send()
     
-    
-    
-threading.Thread(target=pos, daemon=True).start()
-threading.Thread(target=press, daemon=True).start()
