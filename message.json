@@ -1,13 +1,11 @@
 {
-    "from": "client",
+    "from": "",
     "content": {
         "text": ""
     },
     "command": {
-        "pos": [
-            1749,
-            7000000005
-        ],
+        "posx": 0,
+        "posy": 0,
         "click": false,
         "key": ""
     }

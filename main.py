@@ -1,19 +1,20 @@
 import threading
 import lib
-from sender import send as sendS, tp as tpS
+from sender import send as sendS, tp as tpS, recv as recvS
+threading.Thread(target=recvS, daemon=True).start()
 import json
 msg={        
-        "from": "",
-        "content": {
-            "text": ""
-        },
-        "command":{
-            "posx": 0,
-            "posy": 0,
-            "click": False,
-            "key": ""
-        }
+    "from": "",
+    "content": {
+        "text": ""
+    },
+    "command":{
+        "posx": 0,
+        "posy": 0,
+        "click": False,
+        "key": ""
     }
+}
 def updateMsg():
     global msg  
     msg["content"]["text"] = ""
