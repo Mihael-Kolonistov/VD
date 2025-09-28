@@ -37,3 +37,5 @@ threading.Thread(target=recv, daemon=True).start()
 
 def send(msg):
     s.send(msg.encode())
+while True:
+    send(input("Text: "))
