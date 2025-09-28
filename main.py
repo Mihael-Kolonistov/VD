@@ -1,6 +1,6 @@
 import threading
 import lib
-
+from sender import send as sendS, tp as tpS
 import json
 msg={        
         "from": "",
@@ -14,17 +14,20 @@ msg={
             "key": ""
         }
     }
-
-
-def sendCur(pos = lib.posc, msg=msg):    
-    import sender
+def updateMsg():
+    global msg  
     msg["content"]["text"] = ""
-    msg["from"] = sender.tp
+    msg["from"] = tpS
     x,y = lib.posc
     msg["command"]["posx"] = x
     msg["command"]["posy"] = y
-    msg = json.dumps(msg)
-    sender.send(msg)
+    msg["command"]["key"] = lib.pressed
+    msg["content"]["text"]="gg!"
+    
+    
 
-threading.Thread(target=lib.pos, daemon=True).start()
-sendCur()
+def send(msg=msg): 
+    sendS(json.dumps(msg))
+if __name__=="__main__":
+    send()
+    
