@@ -1,30 +1,30 @@
 import socket
 import threading
 
-ip = input("Enter target IP: ")
+ip = '127.0.0.1'
 port = 12345
 
-sock = socket.socket()
+s = socket.socket()
 
 try:
-    sock.connect((ip, port))
-    print("Connected as client")
+    s.connect((ip, port))
 except:
-    sock.close()
-    sock = socket.socket()
-    sock.bind(('0.0.0.0', port))
-    sock.listen()
-    print("Waiting for connection...")
-    sock, addr = sock.accept()
-    print("Connected as server")
+    s.close()
+    s = socket.socket()
+    s.bind(('0.0.0.0', port))
+    s.listen()
+    s, _ = s.accept()
 
-def listen():
+def recv():
     while True:
-        data = sock.recv(1024).decode()
-        print(f"\nReceived: {data}\nYou: ", end='')
+        try:
+            msg = s.recv(1024).decode()
+            return msg
+        except:
+            break
 
-threading.Thread(target=listen, daemon=True).start()
+threading.Thread(target=recv, daemon=True).start()
 
 while True:
     msg = input("You: ")
-    sock.send(msg.encode())
+    s.send(msg.encode())
