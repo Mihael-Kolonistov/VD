@@ -1,24 +1,33 @@
 import socket
 import threading
+import json
 
-ip = '0.0.0.0'
+ip = '127.0.0.1'
 port = 12345
-
 s = socket.socket()
-s.bind((ip, port))
-s.listen()
-conn, addr = s.accept()
-
-def listen():
+try:
+    s.connect((ip, port))
+    tp = "client"
+except:
+    s.close()
+    s = socket.socket()
+    s.bind(('0.0.0.0', port))
+    tp = "server"
+    s.listen()
+    s, _ = s.accept()
+def recv():
     while True:
-        data = conn.recv(1024).decode()
-        print(f"Received: {data}")
+        try:
+            msg = s.recv(1024).decode()
+            msg = json.loads(msg)
+            with open('message.json', 'w', encoding='utf-8') as file:
+                json.dump(msg, file, ensure_ascii=False, indent=4)    
+                pass               
+            
+        except Exception as e:
+            print(e)            
+            pass
+threading.Thread(target=recv, daemon=True).start()
+def send(msg):
+    s.send(msg.encode())
 
-threading.Thread(target=listen, daemon=True).start()
-
-def sendText(text):
-    print(f"snd: "+text)
-    s.send(text.encode())
-while True:
-    
-    sendText(input("text"))

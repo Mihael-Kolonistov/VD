@@ -1,4 +1,6 @@
 import pyautogui
-def pos():          
+posc=()
+def pos(): 
+    global posc         
     x,y = pyautogui.position()
-    return (x,y)    
+    posc=(x,y)
