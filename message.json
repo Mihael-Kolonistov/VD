@@ -1,7 +1,14 @@
 {
-    "type": "",
     "from": "client",
     "content": {
-        "text": "jjh"
+        "text": ""
+    },
+    "command": {
+        "pos": [
+            1749,
+            705
+        ],
+        "click": false,
+        "key": ""
     }
 }
