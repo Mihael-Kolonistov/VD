@@ -1,41 +1,39 @@
+# chat_module.py
 import socket
 import threading
 import json
 
-ip = '127.0.0.1'
-port = 12345
+class Snd:
+    def __init__(self, ip='127.0.0.1', port=12345):
+        self.ip = ip
+        self.port = port
+        self.s = socket.socket()
+        self.podkl()
+        threading.Thread(target=self.recv, daemon=True).start()
 
-s = socket.socket()
-
-print("Ожидание подключения...")
-try:
-    s.connect((ip, port))
-    tp = "client"
-except:
-    s.close()
-    s = socket.socket()
-    s.bind(('0.0.0.0', port))
-    tp = "server"
-    s.listen()
-    s, _ = s.accept()
-
-def recv():
-    while True:
+    def podkl(self):
+        print("Ожидание подключения...")
         try:
-            msg = s.recv(1024).decode()
-            msg = json.loads(msg)
-            
-            with open('message.json', 'w', encoding='utf-8') as file:
-                json.dump(msg, file, ensure_ascii=False, indent=4)    
-                pass               
-            
-        except Exception as e:
-            print(e)            
-            pass
+            self.s.connect((self.ip, self.port))
+            self.tp = "client"
+        except:
+            self.s.close()
+            self.s = socket.socket()
+            self.s.bind(('0.0.0.0', self.port))
+            self.tp = "server"
+            self.s.listen()
+            self.s, _ = self.s.accept()
+        print("Подключено!")
 
-threading.Thread(target=recv, daemon=True).start()
+    def recv(self):
+        while True:
+            try:
+                msg = self.s.recv(1024).decode()
+                msg = json.loads(msg)
+                with open('message.json', 'w', encoding='utf-8') as file:
+                    json.dump(msg, file, ensure_ascii=False, indent=4)
+            except Exception as e:
+                print(str(e))
 
-def send(msg):
-    s.send(msg.encode())
-while True:
-    send(input("Text: "))
+    def send(self, msg):
+        self.s.send(str(msg).encode())
