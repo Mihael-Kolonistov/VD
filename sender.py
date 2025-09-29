@@ -1,19 +1,19 @@
-# chat_module.py
 import socket
 import threading
 import json
 
 class Snd:
-    def __init__(self, ip='127.0.0.1', port=12345):
+    def __init__(self, ip='192.168.56.1', port=12345):
         self.ip = ip
         self.port = port
-        self.s = socket.socket()
+        self.s = None
+        self.tp = None
         self.podkl()
-        threading.Thread(target=self.recv, daemon=True).start()
 
     def podkl(self):
         print("Ожидание подключения...")
         try:
+            self.s = socket.socket()
             self.s.connect((self.ip, self.port))
             self.tp = "client"
         except:
@@ -24,6 +24,7 @@ class Snd:
             self.s.listen()
             self.s, _ = self.s.accept()
         print("Подключено!")
+        threading.Thread(target=self.recv, daemon=True).start()
 
     def recv(self):
         while True:

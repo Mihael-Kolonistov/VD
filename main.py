@@ -1,9 +1,7 @@
 from sender import Snd
-import threading
-import time
 
-sender = Snd()
+chat = Snd('192.168.56.1')
 
-
-threading.Thread(target=sender.recv, daemon=True).start()
-sender.send({'hi': "again"})
+while True:
+    text = input()
+    chat.send()
