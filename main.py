@@ -3,10 +3,37 @@ import json
 
 chat = Snd('192.168.56.1')
 
-msg = json.load(open("message.json", "r", encoding="utf-8"))
-while True:
-    text = input()
+msgF ={   
+    "type": "file",     
+    "from": "",
+    "content": {
+        "text": ""
+    },
     
-    msg["content"]["text"] = text
+}
+
+msgT ={    
+    "type": "text",       
+    "text": ""    
+}
+
+msgC ={   
+    "type": "command",  
+
+    "posx": 0,
+    "posy": 0,
+    "click": False,
+    "key": ""
     
-    chat.send(msg)
+}
+
+def init():
+    
+    while True:
+        text = input()
+
+        msgT["content"]["text"] = text
+
+        chat.send(msgT)
+if __name__=="__main__":
+    msgT["content"]["text"] = "Вы подключены!"

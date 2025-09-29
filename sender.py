@@ -34,7 +34,7 @@ class Snd:
                 with open('message.json', 'w', encoding='utf-8') as file:
                     json.dump(msg, file, ensure_ascii=False, indent=4)
             except Exception as e:
-                print(str(e))
+                print(json.dumps(e))
 
     def send(self, msg):
-        self.s.send(str(msg).encode())
+        self.s.send(json.dumps(msg).encode())
