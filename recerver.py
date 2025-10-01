@@ -2,7 +2,7 @@ import socket
 import threading
 import json
 
-class Snd:
+class Rec:
     def __init__(self, ip='192.168.56.1', port=12345):
         self.ip = ip
         self.port = port

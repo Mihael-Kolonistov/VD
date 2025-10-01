@@ -1,4 +1,4 @@
-msgF ={   
+msgF = {   
     "type": "file",     
     "from": "",
     "to": "",
@@ -8,7 +8,7 @@ msgF ={
     
 }
 
-msgT ={    
+msgT = {    
     "type": "text",       
     "text": ""    
 }
