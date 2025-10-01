@@ -25,12 +25,15 @@ msgF={
 
 
 
-def upd():
+def ini():
+    global msgC, msgF, msgT
+    
     snd = Snd()
     while True:
         time.sleep(wait)
+        snd.send(msgC)
         
         
         
 def send():    
-    threading.Thread(target=upd).start()
+    threading.Thread(target=ini, daemon=True).start()

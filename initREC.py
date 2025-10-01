@@ -5,4 +5,4 @@ def ini():
     rec = Rec()        
         
 def start():    
-    threading.Thread(target=ini).start()
+    ini()
