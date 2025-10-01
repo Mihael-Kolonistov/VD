@@ -18,6 +18,4 @@ class main:
     def __init__(self):
         with mouse.Listener(on_move=self.pos, on_click=self.cl) as ls:
             ls.join()
-if __name__=="__main__":
-    main.__init__(self = main)
-    
+
