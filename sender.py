@@ -17,7 +17,6 @@ class Snd:
         self.s.connect((self.ip, self.port))
         self.tp = "sender"
         print("Подключено!")
-        threading.Thread(target=self.recv, daemon=True).start()
 
     def send(self, msg):
         self.s.send(json.dumps(msg).encode())
