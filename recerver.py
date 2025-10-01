@@ -11,10 +11,9 @@ class Rec:
         self.podkl()
 
     def podkl(self):
-        print("Ожидание подключения...")       
-        self.s.close()
+        print("Ожидание подключения...")      
         self.s = socket.socket()
-        self.s.bind(('0.0.0.0', self.port))
+        self.s.bind(('192.168.56.1', self.port))
         self.tp = "recv"
         self.s.listen()
         self.s, _ = self.s.accept()

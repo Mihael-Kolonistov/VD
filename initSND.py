@@ -2,6 +2,7 @@ from sender import Snd
 import json
 import threading
 import time
+import random
 
 wait = 0.5
 
@@ -11,7 +12,7 @@ msgT={
 }
 msgC={
     "type": "cmd",
-    "pos": "",
+    "pos": "hhh",
     "btn": "",
     "click": "False"
 }
@@ -30,10 +31,12 @@ def ini():
     
     snd = Snd()
     while True:
+        msgC["type"]=random.randint(0,1000)
         time.sleep(wait)
         snd.send(msgC)
         
         
         
-def send():    
-    threading.Thread(target=ini, daemon=True).start()
+def start():    
+    ini()
+start()
