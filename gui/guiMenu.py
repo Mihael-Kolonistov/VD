@@ -92,5 +92,7 @@ therme.grid(column=3, row=0, ipadx=5, padx=5, pady=5)
 actions.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=1)
 
 #настройки темы
+
+
 thermeInit()
 root.mainloop()
