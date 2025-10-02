@@ -51,7 +51,7 @@ def thermeInit():
 root = Tk()
 root.minsize(width = 310, height=390)
 
-root.geometry("660x320")
+root.geometry("310x390")
 root.title("Старотвые настройки")
 
 for c in range(1): root.columnconfigure(index=c, weight=1)
@@ -68,9 +68,10 @@ ip=LabelFrame(prarm, text="ip(обязательно при подключени
 port=LabelFrame(prarm, text="Порт подключения")
 
 types = ["Desktop", "User"]#user = sender, desktop = client
-tps= ttk.Combobox(type, values=types).grid(sticky="ns")
+tps= ttk.Combobox(type, values=types).grid(sticky="ns", padx=10)
 
-ipE = ttk.Entry(ip).grid(sticky="ns")
+ipE = ttk.Entry(ip).grid(sticky="ns", padx=10)
+portE = ttk.Entry(port).grid(sticky="ns", padx=10)
 
 #панель снизу, запуск и т.д.
 actions = LabelFrame(root, text="Инструменты")
@@ -83,10 +84,10 @@ therme = Button(actions, text="сменить тему", relief='groove', comman
 
 win.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=0)
 
-prarm.grid(column=0, row=0, ipadx=5, padx=5, pady=5, sticky="nswe")
-type.grid(column=0, row=0, ipadx=10, padx=5,ipady=5, pady=5, sticky="nswe")
-port.grid(column=0, row=1, ipadx=10, padx=5,ipady=5, pady=5, sticky="nswe")
-ip.grid(column=0, row=2, ipadx=10, padx=5, ipady=5, pady=5, sticky="nswe")
+prarm.grid(column=0, row=0, padx=5, pady=5, sticky="nswe")
+type.grid(column=0, row=0, padx=5, pady=5, sticky="nswe")
+port.grid(column=0, row=1, padx=5, pady=5, sticky="nswe")
+ip.grid(column=0, row=2,padx=5, pady=5, sticky="nswe")
 
 podkl.grid(column=0, row=0, ipadx=5, padx=5, pady=5)
 therme.grid(column=3, row=0, ipadx=5, padx=5, pady=5)
