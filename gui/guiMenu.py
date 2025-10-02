@@ -78,7 +78,6 @@ actions.columnconfigure(index=1, weight=1)
 
 podkl = Button(actions, text="Подключиться", relief='groove')
 therme = Button(actions, text="сменить тему", relief='groove', command=thermeChange)
-
 #grid
 
 win.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=0)
