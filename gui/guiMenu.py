@@ -47,9 +47,15 @@ root.rowconfigure(index=0, weight=1)
 win=LabelFrame(root, text="Старотвые настройки")
 win.rowconfigure(index=0, weight=1)
 win.columnconfigure(index=0, weight=1)
-win.columnconfigure(index=1, weight=1)
 #окно инф-ии
 prarm=LabelFrame(win, text="Параметр")
+
+type=LabelFrame(win, text="Тип подключения")
+ip=LabelFrame(win, text="ip(обязательно при подключении первым)")
+port=LabelFrame(win, text="Порт подключения")
+
+types = ["Desktop", "User"]#user = sender, desktop = client
+combobox = ttk.Combobox(values=types)
 
 #панель снизу, запуск и т.д.
 actions = LabelFrame(root, text="Инструменты")
