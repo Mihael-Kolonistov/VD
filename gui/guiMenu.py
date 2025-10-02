@@ -67,10 +67,6 @@ type=LabelFrame(prarm, text="Тип подключения")
 ip=LabelFrame(prarm, text="ip(обязательно при подключении первым)")
 port=LabelFrame(prarm, text="Порт подключения")
 
-type.rowconfigure(index=0, weight=1)
-ip.rowconfigure(index=0, weight=1)
-port.rowconfigure(index=0, weight=1)
-
 types = ["Desktop", "User"]#user = sender, desktop = client
 tps= ttk.Combobox(type, values=types).grid(sticky="ns")
 
