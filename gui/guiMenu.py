@@ -21,20 +21,20 @@ def thermeInit():
         if cfgj["therme"] == "night":
             root["bg"]="#242424"
             win["bg"]="#242424"
-            win["fg"]="#E0E0E0"
+            win["fg"]="#f0f0f0"
             actions["bg"]="#242424"
-            actions["fg"]="#E0E0E0"
+            actions["fg"]="#f0f0f0"
             prarm["bg"]="#242424"
-            prarm["fg"]="#E0E0E0"
+            prarm["fg"]="#f0f0f0"
             
         elif cfgj["therme"] == "day":
-            root["bg"]="#E0E0E0"
-            win["bg"]="#E0E0E0"
+            root["bg"]="#f0f0f0"
+            win["bg"]="#f0f0f0"
             win["fg"]="#242424"
-            actions["bg"]="#E0E0E0"
+            actions["bg"]="#f0f0f0"
             actions["fg"]="#242424"
             prarm["fg"]="#242424"
-            prarm["bg"]="#E0E0E0"
+            prarm["bg"]="#f0f0f0"
     
 root = Tk()
 
@@ -50,12 +50,12 @@ win.columnconfigure(index=0, weight=1)
 #окно инф-ии
 prarm=LabelFrame(win, text="Параметр")
 
-type=LabelFrame(win, text="Тип подключения")
-ip=LabelFrame(win, text="ip(обязательно при подключении первым)")
-port=LabelFrame(win, text="Порт подключения")
+type=LabelFrame(prarm, text="Тип подключения")
+ip=LabelFrame(prarm, text="ip(обязательно при подключении первым)")
+port=LabelFrame(prarm, text="Порт подключения")
 
 types = ["Desktop", "User"]#user = sender, desktop = client
-combobox = ttk.Combobox(values=types)
+tps= ttk.Combobox(type, values=types).grid()
 
 #панель снизу, запуск и т.д.
 actions = LabelFrame(root, text="Инструменты")
@@ -67,9 +67,12 @@ therme = Button(actions, text="сменить тему", relief='groove', comman
 
 #grid
 
-win.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5)
+win.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=0)
 
 prarm.grid(column=0, row=0, ipadx=5, padx=5, pady=5, sticky="nswe")
+type.grid(column=0, row=0, ipadx=5, padx=5, pady=5, sticky="nswe")
+port.grid(column=0, row=1, ipadx=5, padx=5, pady=5, sticky="nswe")
+ip.grid(column=0, row=2, ipadx=5, padx=5, pady=5, sticky="nswe")
 
 podkl.grid(column=0, row=0, ipadx=5, padx=5, pady=5)
 therme.grid(column=3, row=0, ipadx=5, padx=5, pady=5)
