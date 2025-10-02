@@ -5,7 +5,3 @@ def ini():
     rec = Rec() 
     while True:
         pass      
-        
-def start():    
-    ini()
-start()

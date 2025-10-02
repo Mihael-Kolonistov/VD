@@ -1,6 +1,6 @@
-from tkinter import Tk, ttk, LabelFrame, Button
+from tkinter import Tk, ttk, LabelFrame, Button, StringVar
 import json
-
+import threading
 def thermeChange():
     with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
         cfgj = json.loads(cfg.read())
@@ -15,6 +15,7 @@ def thermeChange():
     with open('gui/config.json', 'w', encoding='utf-8') as cfg:    
         json.dump(cfgj, cfg, ensure_ascii=False, indent=4)
     thermeInit()
+    
 def thermeInit():
     with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
         cfgj = json.loads(cfg.read())
@@ -47,6 +48,8 @@ def thermeInit():
             ip["bg"]="#f0f0f0"
             port["fg"]="#242424"
             port["bg"]="#f0f0f0"
+
+
     
 root = Tk()
 root.minsize(width = 310, height=390)
@@ -68,17 +71,33 @@ ip=LabelFrame(prarm, text="ip(обязательно при подключени
 port=LabelFrame(prarm, text="Порт подключения")
 
 types = ["Desktop", "User"]#user = sender, desktop = client
-tps= ttk.Combobox(type, values=types).grid(sticky="ns", padx=10)
+typeSt = StringVar()
+tps= ttk.Combobox(type, values=types, textvariable=typeSt).grid(sticky="ns", padx=10, pady=5)
 
-ipE = ttk.Entry(ip).grid(sticky="ns", padx=10)
-portE = ttk.Entry(port).grid(sticky="ns", padx=10)
+ipE = ttk.Entry(ip)
+ipE.grid(sticky="ns", padx=10, pady=5)
+portE = ttk.Entry(port)
+portE.grid(sticky="ns", padx=10, pady=5)
 
 #панель снизу, запуск и т.д.
 actions = LabelFrame(root, text="Инструменты")
 actions.rowconfigure(index=0, weight=1)
 actions.columnconfigure(index=1, weight=1)
 
-podkl = Button(actions, text="Подключиться", relief='groove')
+def req(ip = ipE, type = typeSt, port = portE):
+    ip = ipE.get()
+    type = typeSt.get()
+    port = portE.get()
+    if ip != "" and port != "" and (type == "Desktop" or type=="User"):
+        if type=="Desktop":
+            from initSND import ini
+            threading.Thread(target=ini, daemon= True).start()
+        elif type=="User":
+            from initREC import ini
+            threading.Thread(target=ini, daemon=True).start()
+    print(ip, type, port)
+    
+podkl = Button(actions, text="Подключиться", relief='groove', command=req)
 therme = Button(actions, text="сменить тему", relief='groove', command=thermeChange)
 #grid
 

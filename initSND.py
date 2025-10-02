@@ -1,6 +1,6 @@
 from sender import Snd
 import json
-import threading
+
 import time
 import random
 
@@ -34,9 +34,3 @@ def ini():
         msgC["type"]=random.randint(0,1000)
         time.sleep(wait)
         snd.send(msgC)
-        
-        
-        
-def start():    
-    ini()
-start()
