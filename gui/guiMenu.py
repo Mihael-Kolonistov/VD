@@ -26,6 +26,12 @@ def thermeInit():
             actions["fg"]="#f0f0f0"
             prarm["bg"]="#242424"
             prarm["fg"]="#f0f0f0"
+            type["bg"]="#242424"
+            type["fg"]="#f0f0f0"
+            ip["bg"]="#242424"
+            ip["fg"]="#f0f0f0"
+            port["bg"]="#242424"
+            port["fg"]="#f0f0f0"
             
         elif cfgj["therme"] == "day":
             root["bg"]="#f0f0f0"
@@ -35,6 +41,12 @@ def thermeInit():
             actions["fg"]="#242424"
             prarm["fg"]="#242424"
             prarm["bg"]="#f0f0f0"
+            type["fg"]="#242424"
+            type["bg"]="#f0f0f0"
+            ip["fg"]="#242424"
+            ip["bg"]="#f0f0f0"
+            port["fg"]="#242424"
+            port["bg"]="#f0f0f0"
     
 root = Tk()
 
@@ -55,7 +67,9 @@ ip=LabelFrame(prarm, text="ip(обязательно при подключени
 port=LabelFrame(prarm, text="Порт подключения")
 
 types = ["Desktop", "User"]#user = sender, desktop = client
-tps= ttk.Combobox(type, values=types).grid()
+tps= ttk.Combobox(type, values=types).grid(sticky="ns")
+
+ipE = ttk.Entry(ip).grid(sticky="ns")
 
 #панель снизу, запуск и т.д.
 actions = LabelFrame(root, text="Инструменты")
@@ -70,9 +84,9 @@ therme = Button(actions, text="сменить тему", relief='groove', comman
 win.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=0)
 
 prarm.grid(column=0, row=0, ipadx=5, padx=5, pady=5, sticky="nswe")
-type.grid(column=0, row=0, ipadx=5, padx=5, pady=5, sticky="nswe")
-port.grid(column=0, row=1, ipadx=5, padx=5, pady=5, sticky="nswe")
-ip.grid(column=0, row=2, ipadx=5, padx=5, pady=5, sticky="nswe")
+type.grid(column=0, row=0, ipadx=10, padx=5,ipady=5, pady=5, sticky="nswe")
+port.grid(column=0, row=1, ipadx=10, padx=5,ipady=5, pady=5, sticky="nswe")
+ip.grid(column=0, row=2, ipadx=10, padx=5, ipady=5, pady=5, sticky="nswe")
 
 podkl.grid(column=0, row=0, ipadx=5, padx=5, pady=5)
 therme.grid(column=3, row=0, ipadx=5, padx=5, pady=5)
