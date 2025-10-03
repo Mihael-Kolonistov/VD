@@ -101,7 +101,7 @@ def req(ip = ipE, type = typeSt, port = portE):
                 if type=="Desktop":
                     from initSND import ini
                     from lib import main
-                    main.__init__()
+                    main()
                     threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
                 elif type=="User":
                     from initREC import ini

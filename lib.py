@@ -1,6 +1,7 @@
 import msvcrt
 from pynput import mouse
 from initSND import msgC
+import threading
 
 class main:
     def press(self):  
@@ -15,8 +16,11 @@ class main:
 
     def cl(self, button, pressed):
         msgC["click"] =  True if pressed else False
-        
-    def __init__(self):
+    def ini(self):
         with mouse.Listener(on_move=self.pos, on_click=self.cl) as ls:
             ls.join()
+    
+    def __init__(self):
+        threading.Thread(target=self.ini, daemon= True).start()
+        
 

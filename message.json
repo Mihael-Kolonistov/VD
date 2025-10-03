@@ -1,6 +1,9 @@
 {
     "type": "cmd",
-    "pos": "hhh",
+    "pos": [
+        3081,
+        310
+    ],
     "btn": "",
-    "click": "False"
+    "click": true
 }
