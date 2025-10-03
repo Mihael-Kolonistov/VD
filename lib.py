@@ -1,8 +1,7 @@
 import msvcrt
-from pynput import mouse
+from pynput.mouse import Listener
 from initSND import msgC
 import threading
-
 class main:
     def press(self):  
         
@@ -10,17 +9,28 @@ class main:
         char = msvcrt.getch() 
         pressed = char.decode('utf-8')  
         msgC["btn"] = pressed
+        print(pressed)
 
     def pos(self, x, y):
-        msgC["pos"] = (x, y)
+        msgC["pos"] = ((x, y))
 
-    def cl(self, button, pressed):
+    def cl(self, x, y, pressed):
         msgC["click"] =  True if pressed else False
-    def ini(self):
-        with mouse.Listener(on_move=self.pos, on_click=self.cl) as ls:
-            ls.join()
-    
-    def __init__(self):
-        threading.Thread(target=self.ini, daemon= True).start()
+        msgC["clickAt"] = ((x, y))
+        if not pressed:
+            pass
         
-
+    def sc(self, dy):  
+        msgC["scroll"] = dy
+    def ini(self):    
+        listener = Listener(
+            on_move=self.pos,
+            on_click=self.cl,
+            on_scroll=self.sc)
+        listener.start()
+            
+    def __init__(self):
+        threading.Thread(target=self.ini, daemon=True).start()
+        
+if __name__=="__main__":
+    main()  

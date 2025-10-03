@@ -14,7 +14,9 @@ msgC={
     "type": "cmd",
     "pos": "hhh",
     "btn": "",
-    "click": "False"
+    "click": "False",
+    "clickAt": "", 
+    "scroll": ""
 }
 
 msgF={

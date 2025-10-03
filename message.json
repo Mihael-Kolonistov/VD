@@ -1,9 +1,14 @@
 {
     "type": "cmd",
     "pos": [
-        3081,
-        310
+        1080,
+        116
     ],
     "btn": "",
-    "click": true
+    "click": true,
+    "clickAt": [
+        1437,
+        131
+    ],
+    "scroll": 3315
 }
