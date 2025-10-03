@@ -100,6 +100,8 @@ def req(ip = ipE, type = typeSt, port = portE):
                 port = int(port)
                 if type=="Desktop":
                     from initSND import ini
+                    from lib import main
+                    main.__init__()
                     threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
                 elif type=="User":
                     from initREC import ini
@@ -107,7 +109,7 @@ def req(ip = ipE, type = typeSt, port = portE):
                 go = True
             except Exception as e:
                 threading.Thread(target=Error, kwargs={"text": "Порт должен быть числом"}, daemon= True).start()
-                print("Порт должен быть числом")
+                print(e)
         else:
             threading.Thread(target=Info, kwargs={"text": "Вы уже подключены. Для перезапуска закройте приложение и запустите заново."}, daemon= True).start()
     else:

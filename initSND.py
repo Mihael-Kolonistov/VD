@@ -35,6 +35,5 @@ def init(ip, port):
     
     snd = Snd(ip, port)
     while True:
-        msgC["type"]=random.randint(0,1000)
         time.sleep(wait)
         snd.send(msgC)
