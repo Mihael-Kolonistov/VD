@@ -1,6 +1,10 @@
-from tkinter import Tk, ttk, LabelFrame, Button, StringVar
+from tkinter import Tk, ttk, LabelFrame, Button, StringVar, messagebox as mb
 import json
 import threading
+
+def Error(text):
+    mb.showerror("Ошибка", text)
+    
 def thermeChange():
     with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
         cfgj = json.loads(cfg.read())
@@ -89,14 +93,18 @@ def req(ip = ipE, type = typeSt, port = portE):
     type = typeSt.get()
     port = portE.get()
     if ip != "" and port != "" and (type == "Desktop" or type=="User"):
-        if type=="Desktop":
-            from initSND import ini
-            threading.Thread(target=ini, daemon= True).start()
-        elif type=="User":
-            from initREC import ini
-            threading.Thread(target=ini, daemon=True).start()
-    print(ip, type, port)
-    
+        try:
+            port = int(port)
+            if type=="Desktop":
+                from initSND import ini
+                threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
+            elif type=="User":
+                from initREC import ini
+                threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
+        except Exception as e:
+            threading.Thread(target=Error, kwargs={"text": "Порт должен быть числом"}, daemon= True).start()
+            print("Порт должен быть числом")
+            
 podkl = Button(actions, text="Подключиться", relief='groove', command=req)
 therme = Button(actions, text="сменить тему", relief='groove', command=thermeChange)
 #grid

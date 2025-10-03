@@ -3,7 +3,7 @@ import threading
 import json
 
 class Snd:
-    def __init__(self, ip='192.168.56.1', port=12345):
+    def __init__(self, ip, port):
         self.ip = ip
         self.port = port
         self.s = None
@@ -14,6 +14,7 @@ class Snd:
         print("Ожидание подключения...")
         
         self.s = socket.socket()
+        self.s.settimeout(None)
         self.s.connect((self.ip, self.port))
         self.tp = "sender"
         print("Подключено!")

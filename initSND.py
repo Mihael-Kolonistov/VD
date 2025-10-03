@@ -26,10 +26,10 @@ msgF={
 
 
 
-def ini():
+def ini(ip, port):
     global msgC, msgF, msgT
     
-    snd = Snd()
+    snd = Snd(ip, port)
     while True:
         msgC["type"]=random.randint(0,1000)
         time.sleep(wait)

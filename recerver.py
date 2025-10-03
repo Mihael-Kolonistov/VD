@@ -3,7 +3,7 @@ import threading
 import json
 
 class Rec:
-    def __init__(self, ip='192.168.1.105', port=12345):
+    def __init__(self, ip, port):
         self.ip = ip
         self.port = port
         self.s = None
@@ -13,6 +13,9 @@ class Rec:
     def podkl(self):
         print("Ожидание подключения...")      
         self.s = socket.socket()
+        
+        self.s.settimeout(None)
+        
         self.s.bind(("", self.port))
         self.tp = "recv"
         self.s.listen()
