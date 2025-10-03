@@ -1,6 +1,6 @@
 from sender import Snd
 import json
-
+import threading
 import time
 import random
 
@@ -26,7 +26,11 @@ msgF={
 
 
 
+
 def ini(ip, port):
+    threading.Thread(target=init, daemon=True, kwargs={"ip": ip, "port": port}).start()
+        
+def init(ip, port):
     global msgC, msgF, msgT
     
     snd = Snd(ip, port)

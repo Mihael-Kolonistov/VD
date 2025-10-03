@@ -1,10 +1,11 @@
-from tkinter import Tk, ttk, LabelFrame, Button, StringVar, messagebox as mb
+from tkinter import Tk, ttk, LabelFrame, Button, StringVar
 import json
 import threading
 
-def Error(text):
-    mb.showerror("Ошибка", text)
-    
+from dialog import Info, Error
+
+go = False
+
 def thermeChange():
     with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
         cfgj = json.loads(cfg.read())
@@ -89,22 +90,28 @@ actions.rowconfigure(index=0, weight=1)
 actions.columnconfigure(index=1, weight=1)
 
 def req(ip = ipE, type = typeSt, port = portE):
+    global go
     ip = ipE.get()
     type = typeSt.get()
     port = portE.get()
     if ip != "" and port != "" and (type == "Desktop" or type=="User"):
-        try:
-            port = int(port)
-            if type=="Desktop":
-                from initSND import ini
-                threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
-            elif type=="User":
-                from initREC import ini
-                threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
-        except Exception as e:
-            threading.Thread(target=Error, kwargs={"text": "Порт должен быть числом"}, daemon= True).start()
-            print("Порт должен быть числом")
-            
+        if not go:
+            try:
+                port = int(port)
+                if type=="Desktop":
+                    from initSND import ini
+                    threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
+                elif type=="User":
+                    from initREC import ini
+                    threading.Thread(target=ini, kwargs={"ip": ip, "port": port}, daemon= True).start()
+                go = True
+            except Exception as e:
+                threading.Thread(target=Error, kwargs={"text": "Порт должен быть числом"}, daemon= True).start()
+                print("Порт должен быть числом")
+        else:
+            threading.Thread(target=Info, kwargs={"text": "Вы уже подключены. Для перезапуска закройте приложение и запустите заново."}, daemon= True).start()
+    else:
+        threading.Thread(target=Error, kwargs={"text": "Вы ввлели неверные параметры, пожалуйста, проверьте их и попробуйте снова!"}, daemon= True).start()
 podkl = Button(actions, text="Подключиться", relief='groove', command=req)
 therme = Button(actions, text="сменить тему", relief='groove', command=thermeChange)
 #grid

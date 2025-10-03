@@ -1,6 +1,7 @@
 import socket
 import threading
 import json
+from dialog import Info, Error
 
 class Rec:
     def __init__(self, ip, port):
@@ -11,7 +12,7 @@ class Rec:
         self.podkl()
 
     def podkl(self):
-        print("Ожидание подключения...")      
+        Info("Ожидание подключения...")  
         self.s = socket.socket()
         
         self.s.settimeout(None)
@@ -20,7 +21,7 @@ class Rec:
         self.tp = "recv"
         self.s.listen()
         self.s, _ = self.s.accept()
-        print("Подключено!")
+        Info("Подключено!")
         threading.Thread(target=self.recv, daemon=True).start()
 
     def recv(self):
