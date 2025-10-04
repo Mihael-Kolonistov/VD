@@ -30,7 +30,7 @@ class Rec:
             try:
                 msg = self.s.recv(1024).decode()
                 msg = json.loads(msg)
-                threading.Thread(target=ml, kwargs={"mgs": msg}, daemon=True).start()
+                threading.Thread(target=ml.mainn, kwargs={"mgs": msg}, daemon=True).start()
                 with open('message.json', 'w', encoding='utf-8') as file:
                     json.dump(msg, file, ensure_ascii=False, indent=4)
             except Exception as e:
