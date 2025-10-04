@@ -5,7 +5,7 @@ import threading
 from dialog import Info, Error
 class main:
     
-    go = False
+    
 
     def thermeChange(self):
         with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
@@ -57,7 +57,7 @@ class main:
 
 
     def __init__(self):
-        global go
+        self.go = False
         self.root = Tk()
         self.root.minsize(width = 310, height=390)
 
@@ -97,7 +97,7 @@ class main:
             type = type.get()
             port = port.get()
             if ip != "" and port != "" and (type == "Desktop" or type=="User"):
-                if not go:
+                if not self.go:
                     try:
                         port = int(port)
                         if type=="Desktop":
