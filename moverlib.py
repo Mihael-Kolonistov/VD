@@ -2,7 +2,7 @@ import pyautogui as pg
 import plyer
 import threading
 class mainn:
-    def do(self, mgs):
+    def do(mgs):
         match mgs["type"]:
             case "text":                    
                 plyer.notification.notify(message=mgs["text"], app_name='VDS', title='Получено текстовое сообщение:', )
