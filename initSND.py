@@ -1,10 +1,10 @@
 from sender import Snd
-import json
 import threading
 import time
-import random
 
 wait = 0.5
+
+role = "" #
 
 msgT={
     "type": "text",
@@ -12,7 +12,7 @@ msgT={
 }
 msgC={
     "type": "cmd",
-    "pos": "hhh",
+    "pos": "",
     "btn": "",
     "clickAt": "", 
     "scroll": ""

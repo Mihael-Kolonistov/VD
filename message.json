@@ -1,13 +1,13 @@
 {
-    "type": "cmdii",
+    "type": "cmd",
     "pos": [
-        313,
-        46
+        582,
+        142
     ],
     "btn": "",
     "clickAt": [
-        741,
-        79
+        787,
+        150
     ],
-    "scroll": 0
+    "scroll": ""
 }

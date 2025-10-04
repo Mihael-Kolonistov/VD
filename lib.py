@@ -14,12 +14,13 @@ class main:
     def pos(self, x, y):
         msgC["pos"] = ((x, y))
 
-    def cl(self, x, y, pressed):
-        msgC["clickAt"] = ((x, y))
-        if not pressed:
-            msgC["clickAt"] =(())
+    def cl(self, x, y, pressed, ps=msgC["pos"]):
+        if ps == msgC["clickAt"]:
+            msgC["clickAt"] = ((x, y))
+        else:
+            msgC["clickAt"] =""
         
-    def sc(self, x, y, dy):  
+    def sc(self, dy):  
         msgC["scroll"] = dy
     def ini(self):    
         listener = Listener(
