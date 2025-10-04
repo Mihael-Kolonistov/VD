@@ -57,7 +57,7 @@ class main:
 
 
     def __init__(self):
-        
+        global go
         self.root = Tk()
         self.root.minsize(width = 310, height=390)
 
@@ -91,7 +91,7 @@ class main:
         self.actions.rowconfigure(index=0, weight=1)
         self.actions.columnconfigure(index=1, weight=1)
 
-        def req(self, ip = self.ipE, type = self.typeSt, port = self.portE):
+        def req(ip = self.ipE, type = self.typeSt, port = self.portE):
             global go
             ip = ip.get()
             type = type.get()
