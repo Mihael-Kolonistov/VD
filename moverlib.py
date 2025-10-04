@@ -16,10 +16,6 @@ class mainn:
                     pg.scroll(int(mgs["scroll"]))                
         
     def __init__(self, mgs):
-        threading.Thread(target=self.do, kwargs={"mgs": mgs}, daemon=True).start()
-        
-if __name__=="__main__":
-    mainn({"type": "cmd", "pos": [500, 500], "clickAt": "fg", "scroll": -500})
-                    
+        threading.Thread(target=self.do, kwargs={"mgs": mgs}, daemon=True).start()                  
                 
  
