@@ -4,7 +4,7 @@ import time
 
 wait = 0.5
 
-role = "" #
+role = "" 
 
 msgT={
     "type": "text",
@@ -25,8 +25,10 @@ msgF={
     "file": ""
 }
 
-
-
+msgS={
+    "type": "sc",
+    "file": ""
+}
 
 def ini(ip, port):
     threading.Thread(target=init, daemon=True, kwargs={"ip": ip, "port": port}).start()
