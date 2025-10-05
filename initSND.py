@@ -2,7 +2,7 @@ from sender import Snd
 import threading
 import time
 
-wait = 0.1
+wait = 0
 
 role = "" 
 
