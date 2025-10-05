@@ -16,6 +16,7 @@ class mainn:
                     pg.scroll(int(mgs["scroll"]))                
         
     def __init__(self, mgs):
+        pg.FAILSAFE = False
         self.do(mgs)                  
                 
  
