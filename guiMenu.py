@@ -4,8 +4,6 @@ import threading
 
 from dialog import Info, Error
 class main:
-    
-    
 
     def thermeChange(self):
         with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
@@ -15,13 +13,20 @@ class main:
 
             elif cfgj["therme"] == "day":
                 cfgj["therme"] = "night"
-
             else:
                 cfgj["therme"] = "night"
+                
         with open('gui/config.json', 'w', encoding='utf-8') as cfg:    
             json.dump(cfgj, cfg, ensure_ascii=False, indent=4)
         self.thermeInit()
-
+    def cls(self):
+        with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
+            cfgj = json.loads(cfg.read())
+            cfgj["ports"] = ()
+            cfgj["ips"] = ()
+        with open('gui/config.json', 'w', encoding='utf-8') as cfg: 
+            json.dump(cfgj, cfg, ensure_ascii=False, indent=4) 
+        
     def thermeInit(self):
         with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
             cfgj = json.loads(cfg.read())
@@ -62,9 +67,9 @@ class main:
     def __init__(self):
         self.go = False
         self.root = Tk()
-        self.root.minsize(width = 310, height=390)
+        self.root.minsize(width = 290, height=390)
 
-        self.root.geometry("310x390")
+        self.root.geometry("290x390")
         self.root.title("Старотвые настройки")
 
         for c in range(1): self.root.columnconfigure(index=c, weight=1)
@@ -92,7 +97,9 @@ class main:
         self.portSt = StringVar()
         self.portE = ttk.Combobox(self.port, values=[], textvariable=self.portSt)
         self.portE.grid(sticky="ns", padx=10, pady=5)
-
+        
+        self.clear = Button(self.prarm, text="Очистить файл настроек", relief='groove', command=self.cls)
+        
         #панель снизу, запуск и т.д.
         self.actions = LabelFrame(self.root, text="Инструменты")
         self.actions.rowconfigure(index=0, weight=1)
@@ -133,6 +140,7 @@ class main:
             else:
                 threading.Thread(target=Error, kwargs={"text": "Вы ввлели неверные параметры, пожалуйста, проверьте их и попробуйте снова!"}, daemon= True).start()
         self.podkl = Button(self.actions, text="Подключиться", relief='groove', command=req)
+        
         self.therme = Button(self.actions, text="сменить тему", relief='groove', command=self.thermeChange)
         #grid
 
@@ -142,13 +150,11 @@ class main:
         self.type.grid(column=0, row=0, padx=5, pady=5, sticky="nswe")
         self.port.grid(column=0, row=1, padx=5, pady=5, sticky="nswe")
         self.ip.grid(column=0, row=2,padx=5, pady=5, sticky="nswe")
+        self.clear.grid(column=0, row=3,padx=5, pady=5, sticky="nswe")
 
         self.podkl.grid(column=0, row=0, ipadx=5, padx=5, pady=5)
         self.therme.grid(column=3, row=0, ipadx=5, padx=5, pady=5)
         self.actions.grid(sticky="nswe", padx=5, pady=5 , ipadx=5, ipady=5, column=0, row=1)
-
-        #настройки темы
-
 
         self.thermeInit()
         self.root.mainloop()
