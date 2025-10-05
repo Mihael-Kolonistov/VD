@@ -54,6 +54,9 @@ class main:
                 self.ip["bg"]="#f0f0f0"
                 self.port["fg"]="#242424"
                 self.port["bg"]="#f0f0f0"
+                
+        self.ipE["values"] = cfgj["ips"]
+        self.portE["values"] = cfgj["ports"]
 
 
     def __init__(self):
@@ -79,11 +82,15 @@ class main:
 
         self.types = ["Desktop", "User"]#user = sender, desktop = client
         self.typeSt = StringVar()
-        self.tps= ttk.Combobox(self.type, values=self.types, textvariable=self.typeSt).grid(sticky="ns", padx=10, pady=5)
-
-        self.ipE = ttk.Entry(self.ip)
+        self.tps= ttk.Combobox(self.type, values=self.types, textvariable=self.typeSt, state="readonly").grid(sticky="ns", padx=10, pady=5)
+        
+        
+        self.ipSt = StringVar()
+        self.ipE = ttk.Combobox(self.ip, values=[], textvariable=self.ipSt)
         self.ipE.grid(sticky="ns", padx=10, pady=5)
-        self.portE = ttk.Entry(self.port)
+        
+        self.portSt = StringVar()
+        self.portE = ttk.Combobox(self.port, values=[], textvariable=self.portSt)
         self.portE.grid(sticky="ns", padx=10, pady=5)
 
         #панель снизу, запуск и т.д.
@@ -100,6 +107,15 @@ class main:
                 if not self.go:
                     try:
                         port = int(port)
+                        with open('gui/config.json', 'r', encoding='utf-8') as cfg:    
+                            cfgj = json.loads(cfg.read())
+                            if not port in cfgj["ports"]:
+                                cfgj["ports"].append(port)
+                            if not ip in cfgj["ips"]:            
+                                cfgj["ips"].append(ip)
+                        with open('gui/config.json', 'w', encoding='utf-8') as cfg: 
+                            json.dump(cfgj, cfg, ensure_ascii=False, indent=4)
+                                
                         if type=="Desktop":
                             from initSND import ini
                             from lib import main as ml
